@@ -18,30 +18,20 @@ public class HtmlUtils {
     //url 요청해서 응답 string 반환
     public static String getHtmlTextFromUrl(String urlString) {
         String responseString = "";
-        String charset = "MS949";
         byte[] responseByteArray = null;
         InputStream byteSourceInputStream = null;
 
         ConfigurableUrlByteSource byteSource;
         try {
+            //URL 요청에서 바이트로 읽어옴
             byteSource = new ConfigurableUrlByteSource(new URL(urlString));
             responseByteArray = byteSource.read();
 
+            //inputStream 가져오기
             byteSourceInputStream = ByteSource.wrap(responseByteArray).openStream();
-            UniversalDetector univerSalDetector = new UniversalDetector(null);
-
-            int nread;
-            byte buf[] = new byte[4096];
-            while ((nread = byteSourceInputStream.read(buf)) > 0 && !univerSalDetector.isDone()) {
-                univerSalDetector.handleData(buf, 0, nread);
-            }
-            univerSalDetector.dataEnd();
-
-            String tmpEncoding = univerSalDetector.getDetectedCharset();
-            if (tmpEncoding != null) {
-                charset = tmpEncoding;
-            }
-
+            //바이트에서 인코딩 가져오기
+            String charset = EncodingUtils.getEncodingFromInputStream(byteSourceInputStream);
+            //바이트 인코딩
             responseString = new String(responseByteArray, charset);
         } catch (MalformedURLException e) {
             log.error(e.toString());
@@ -59,6 +49,7 @@ public class HtmlUtils {
 
         ConfigurableUrlByteSource configurableUrlByteSource;
         try {
+            //URL 요청해서 해당 인코딩으로 문자열 가져오기
             configurableUrlByteSource = new ConfigurableUrlByteSource(new URL(urlString));
             responseString = configurableUrlByteSource.asCharSource(Charsets.toCharset(charset)).read();
         } catch (MalformedURLException e) {
