@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class NumberUtils {
+public class CNumberUtils {
     /**
      * maxNum으로부터 아래로 size만큼의 숫자를 리스트로 반환
      * ex) maxNum: 2018, size:3 -> return: [2016, 2017, 2018]
@@ -21,6 +21,8 @@ public class NumberUtils {
      * 지수 형식의 숫자를 full 숫자로 변환
      * ex) "3.708873011E10" -> return: "37088730110"
      *      "90.87" -> return: "90"
+     * @String exponentialNumber
+     * @return String
      */
     public static String convertExponentialNumberToNumberString(String exponentialNumber){
         String numberString="";
