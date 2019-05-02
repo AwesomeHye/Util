@@ -29,7 +29,7 @@ public class CDateUtils {
     
      /**
      * x일 전 날짜 스트링 구하기
-     * ex) Date 1905 -> return: Date 1905
+     * ex) Date 1905 1일 전 -> return: Date 1904
      * @Date date
      * @return Date
      */
