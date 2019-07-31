@@ -1,0 +1,36 @@
+public class StringRefineUtils {
+
+    /**
+     * max length만큼 문자열 자르고 suffix 붙인 문자열 반환
+     *
+     * @param text
+     * @param maxLength
+     * @param suffix
+     * @return
+     */
+    public static String cutTextIfTooLong(String text, int maxLength, String suffix) {
+        return text.length() > maxLength ? text.substring(0, maxLength) + suffix : text;
+    }
+
+
+    /**
+     * text를 정규식 기준으로 split하고 지정한 토큰 사이즈 만큼의 문자열 반환
+     * @param text
+     * @param splitRegex
+     * @param maxTokenSize
+     * @return
+     */
+    public static String getTokenStringFromSplitted(String text, String splitRegex, Integer maxTokenSize) {
+        String[] splittedString = text.split(splitRegex);
+
+        StringBuilder subText = new StringBuilder();
+        int iteratorCount = splittedString.length < maxTokenSize? splittedString.length : maxTokenSize;
+        for(int i = 0; i < iteratorCount; i++){
+            subText.append(splittedString[i]);
+            subText.append(" ");
+        }
+
+        return subText.toString();
+    }
+
+}
