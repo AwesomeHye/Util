@@ -29,3 +29,11 @@
             <artifactId>gson</artifactId>
             <version>2.8.5</version>
         </dependency>
+              
+        <!-- HTTP 통신할 때 사용되는 OkHttpClient 라이브러리 -->
+        <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
+        <dependency>
+           <groupId>com.squareup.okhttp3</groupId>
+           <artifactId>okhttp</artifactId>
+           <version>4.0.1</version>
+        </dependency>
