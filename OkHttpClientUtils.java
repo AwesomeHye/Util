@@ -28,10 +28,36 @@ public class OkHttpClientUtils {
             e.printStackTrace();
         }
 
-        log.info("request: {}", request);
-        log.info("response: {}", response);
-
         return response;
     }
 
+    /**
+     * Response 코드가 200(성공) 일 때 body 반환
+     * @param response
+     * @return responseString
+     */
+    public static String getResponseString(Response response){
+        String responseString = "";
+
+        if(response != null && response.code() == 200) {
+            try {
+                responseString = response.body().string();
+                response.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return responseString;
+    }
+
+    /**
+     * post 요청에 대한 body 반환
+     * @param url
+     * @param requestJson
+     * @return postResponseBody
+     */
+    public static String getPostRequestString(String url, String requestJson){
+        return getResponseString(postRequest(url, requestJson));
+    }
 }
