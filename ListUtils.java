@@ -24,7 +24,7 @@ public class ListUtils {
             System.err.println("subListByNumber(): number of list is 0");
             throw new IllegalArgumentException();
         }else if(numberOfList > listSize){
-            System.err.println("number of list is larger than list size");
+            System.err.println("subListByNumber(): number of list is larger than list size");
             throw new IllegalArgumentException();
         }
 
