@@ -20,14 +20,11 @@ public class ListUtils {
         if(numberOfList == 0) {
             System.err.println("subListByNumber(): number of list is 0");
             throw new IllegalArgumentException();
-        }else if(numberOfList > listSize){
-            System.err.println("subListByNumber(): number of list is larger than list size");
-            throw new IllegalArgumentException();
         }
 
         int[] idx = new int[numberOfList];
         int unitSize = listSize / numberOfList;
-        int rest = listSize % unitSize;
+        int rest = listSize - (numberOfList * unitSize);
 
         for(int i = 0; i < idx.length; i++){ idx[i] += unitSize; }
         for(int i = 0; i < rest; i++){ idx[i] += 1; }
