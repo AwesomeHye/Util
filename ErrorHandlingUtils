@@ -1,17 +1,25 @@
 package kr.datasolution.bigstation.utils.rule.common.util;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 public class ErrorHandlingUtils {
     /**
-     * Catch 로직 내에서 사용
-     * 에러 메시지 출력
-     *
+     * using in catch clause
+     * generate error massage
+     * @param errorMsg
      * @param e
      * @param stackTraceElement Thread.currentThread().getStackTrace()[1]
+     * @return error message string
      */
-    public static void printError(Exception e, StackTraceElement stackTraceElement){
-        log.error("{}.{}:{} - {}: {}", stackTraceElement.getClassName(), stackTraceElement.getMethodName(), stackTraceElement.getLineNumber(), e.getClass(), e.getMessage());
+    public static String getErrorLog(String errorMsg, Exception e, StackTraceElement stackTraceElement){
+        return "< " + errorMsg + " > " + formattedErrorStack(e, stackTraceElement);
     }
+
+    public static String getErrorLog(Exception e, StackTraceElement stackTraceElement){
+        return formattedErrorStack(e, stackTraceElement);
+    }
+
+    private static String formattedErrorStack(Exception e, StackTraceElement stackTraceElement){
+        return stackTraceElement.getClassName() + "." + stackTraceElement.getMethodName() + ": " + stackTraceElement.getLineNumber()  + " - " +  e.getClass()  + ": " +  e.getMessage();
+    }
+
+
 }
