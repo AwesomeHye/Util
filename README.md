@@ -37,3 +37,10 @@
            <artifactId>okhttp</artifactId>
            <version>4.0.1</version>
         </dependency>
+        
+        <!-- ObjectMapper -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.10.3</version>
+        </dependency>
