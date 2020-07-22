@@ -26,6 +26,26 @@ public class PropertyUtils {
 
         return properties;
     }
+    
+     /**
+     * read properties from resources (src/main/resources)
+     *
+     * ex. getPropertyFromResources(this.getClass().getClassLoader(), "application.properties")
+     * @param propertyFileName
+     * @return Properties
+     */
+    public static Properties getPropertyFromResources(ClassLoader classLoader, String propertyFileName) {
+        Properties properties = new Properties();
+
+        try(InputStream inputStream = classLoader.getResourceAsStream(propertyFileName)){
+            getProperty(properties, inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return properties;
+    }
+
 
     /**
      * read properties from given path (src/main/resources)
