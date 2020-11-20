@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
 
@@ -28,6 +29,17 @@ public class FileUtils {
      */
     public static void writeString2File(Path resultFilePath, String dataString) throws IOException {
         Files.write(resultFilePath, (dataString + System.lineSeparator()).getBytes(StandardCharsets.UTF_8), StandardOpenOption.APPEND, StandardOpenOption.WRITE);
+    }
+
+    /**
+     * String 데이터를 파일에 쓴다.
+     * @param resultFilePathString 파일 경로
+     * @param dataString String 형태의 데이터
+     * @throws IOException
+     */
+    public static void writeString2File(String resultFilePathString, String dataString) throws IOException {
+
+        Files.write(Paths.get(resultFilePathString), (dataString + System.lineSeparator()).getBytes(StandardCharsets.UTF_8), StandardOpenOption.APPEND, StandardOpenOption.WRITE);
     }
 
 }
