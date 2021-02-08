@@ -1,0 +1,28 @@
+package kr.co.saramin.lab.searchevaluator.dao;
+
+import com.google.gson.internal.$Gson$Types;
+import lombok.RequiredArgsConstructor;
+import org.elasticsearch.common.unit.TimeValue;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.data.elasticsearch.core.ScrolledPage;
+import org.springframework.data.elasticsearch.core.query.SearchQuery;
+import org.springframework.stereotype.Repository;
+
+@Repository
+@RequiredArgsConstructor
+public class CommonESDao {
+    final long SCROLL_TIME_IN_MILLIS = TimeValue.timeValueMinutes(1L).getMillis(); // 60000
+    public final ElasticsearchOperations esOperations;
+
+    public <T> ScrolledPage<T> startScroll(SearchQuery searchQuery, Class<T> clazz){
+        return esOperations.startScroll(SCROLL_TIME_IN_MILLIS, searchQuery, clazz);
+    }
+
+    public <T> ScrolledPage<T> continueScroll(String scrollId, Class<T> clazz){
+        return esOperations.continueScroll(scrollId, SCROLL_TIME_IN_MILLIS, clazz);
+    }
+
+    public void clearScroll(String scrollId){
+        esOperations.clearScroll(scrollId);
+    }
+}
