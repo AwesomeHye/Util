@@ -44,3 +44,9 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.10.3</version>
         </dependency>
+        
+            // ElasticSearch
+    implementation 'org.springframework.data:spring-data-elasticsearch:3.2.0.RELEASE'
+    implementation 'org.elasticsearch:elasticsearch:6.5.4'
+    implementation 'org.elasticsearch.client:elasticsearch-rest-high-level-client:6.5.4'
+
