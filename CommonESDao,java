@@ -25,4 +25,33 @@ public class CommonESDao {
     public void clearScroll(String scrollId){
         esOperations.clearScroll(scrollId);
     }
+    
+       /**
+     * 인덱스 생성 후 필드 매핑
+     * @param indexName
+     * @param indexType
+     * @param clazz
+     * @param <T>
+     * @return
+     */
+    public <T> boolean createAndMappingIndex(String indexName, String indexType, Class<T> clazz){
+        return esOperations.createIndex(indexName, clazz) &&
+                esOperations.putMapping(indexName, indexType, clazz);
+    }
+
+    /**
+     * aliasName 의 설정된 모든 인덱스 제거 후 indexName 만 add
+     * @param aliasName
+     * @param indexName
+     */
+    public boolean replaceAlias(String aliasName, String indexName){
+        AliasQuery clearAliasQuery = new AliasBuilder().withAliasName(aliasName).withIndexName("*").build();
+        try {
+            esOperations.removeAlias(clearAliasQuery);
+        } catch (ElasticsearchStatusException e){
+            // aliases_not_found_exception - nothing to do
+        }
+        AliasQuery addAliasQuery = new AliasBuilder().withAliasName(aliasName).withIndexName(indexName).build();
+        return esOperations.addAlias(addAliasQuery);
+    }
 }
