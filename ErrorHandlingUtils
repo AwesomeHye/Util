@@ -21,5 +21,13 @@ public class ErrorHandlingUtils {
         return stackTraceElement.getClassName() + "." + stackTraceElement.getMethodName() + ": " + stackTraceElement.getLineNumber()  + " - " +  e.getClass()  + ": " +  e.getMessage();
     }
 
-
+    public static String getErrorStackTrace(Exception e) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(e.getMessage() + System.lineSeparator());
+        for (StackTraceElement stackTraceElement : e.getStackTrace()) {
+            sb.append(String.format("%s %s.%s:%s",stackTraceElement.getFileName(), stackTraceElement.getClassName(),
+                    stackTraceElement.getMethodName(), stackTraceElement.getLineNumber()) + System.lineSeparator());
+        }
+        return sb.toString();
+    }
 }
