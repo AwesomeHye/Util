@@ -74,4 +74,17 @@ public class FileUtils {
 
         writeString2File(resultFilePath, dataString);
     }
+        
+     /**
+     * 다운로드URL로부터 파일을 다운받는다.
+     * @param url
+     * @param filePath
+     */
+    public static void downloadFileFromUrl(String url, String filePath) throws IOException {
+        URL downloadUrl = new URL(url);
+        ReadableByteChannel readableByteChannel = Channels.newChannel(downloadUrl.openStream());
+        FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+
+        fileOutputStream.getChannel().transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
+    }
 }
