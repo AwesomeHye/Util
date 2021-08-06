@@ -59,6 +59,15 @@ public class DateUtils {
     public static int weekOfMonth(LocalDate localDate) {
         return localDate.get(ChronoField.ALIGNED_WEEK_OF_MONTH);
     }
+    
+     /**
+     * Date -> LocalDateTime 변환
+     * @param date
+     * @return
+     */
+    private static LocalDateTime convertDateToLocalDateTime(Date date) {
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+    }
 
 
 }
