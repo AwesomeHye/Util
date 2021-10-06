@@ -85,6 +85,20 @@ public class HighLevelESDao {
     }
 
     /**
+    * 쿼리 검색 결과를 ORM 으로 변환
+    *
+    * @param hits  searchReponse.getHits().getHits()
+    * @param clazz  Dto.class
+    * @param <T>
+    * @return
+    */
+    private <T> List<T> convertHitsToPojoList(SearchHit[] hits, Class<T> clazz) {
+        return Arrays.stream(hits)
+                .map(hit -> objectMapper.convertValue(hit.getSourceAsMap(), clazz))
+                .collect(Collectors.toList());
+    }
+    
+    /**
      * ORM 싱글 인덱싱
      * @param <T>
      * @param client
