@@ -42,7 +42,11 @@ public class EsRepository {
     public void bulkIndex(List<IndexQuery> indexQueryList, IndexCoordinates indexCoordinates) {
         restTemplate.bulkIndex(indexQueryList, indexCoordinates);
     }
-
+    
+    public void  bulkUpdate(List<UpdateQuery> updateQueryList, IndexCoordinates indexCoordinates) {
+        restTemplate.bulkUpdate(updateQueryList, indexCoordinates);
+    }
+    
     public <T> SearchScrollHits<T> startScroll(Query query, Class<T> clazz, IndexCoordinates indexCoordinates) {
         return restTemplate.searchScrollStart(scrollTimeInMillis, query, clazz, indexCoordinates);
     }
